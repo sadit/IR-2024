@@ -1,22 +1,22 @@
 using CodecZlib, JSON
 using Downloads: download
 
-function create_dataset(corpusfile, text, label)
-    corpus, labels = String[], String[]
+function create_dataset(corpusfile, textkey, labelkey)
+    text, labels = String[], String[]
     open(corpusfile) do f
         for line in eachline(GzipDecompressorStream(f))
             r = JSON.parse(line)
-            push!(labels, r[label])
-            push!(corpus, r[text])
+            push!(labels, r[labelkey])
+            push!(text, r[textkey])
         end
     end
     
-    (; corpus, labels)
+    (; text, labels)
 end
 
 
 function get_dataset(dbname)
-    dbfile = "../data/$dbname"
+    dbfile = "data/$dbname"
     baseurl = "https://github.com/sadit/TextClassificationTutorial/blob/main/data"
     !isfile(dbfile) && download("$baseurl/$dbname?raw=true", dbfile)
     dbfile
