@@ -16,9 +16,10 @@ end
 
 
 function get_dataset(dbname)
+    mkpath("data")
     dbfile = "data/$dbname"
     baseurl = "https://github.com/sadit/TextClassificationTutorial/raw/main/data"
-    !isfile(dbfile) && download("$baseurl/$dbname?raw=true", dbfile)
+    !isfile(dbfile) && download("$baseurl/$dbname", dbfile)
     dbfile
 end
 
