@@ -17,7 +17,7 @@ end
 
 function get_dataset(dbname)
     dbfile = "data/$dbname"
-    baseurl = "https://github.com/sadit/TextClassificationTutorial/blob/main/data"
+    baseurl = "https://github.com/sadit/TextClassificationTutorial/raw/main/data"
     !isfile(dbfile) && download("$baseurl/$dbname?raw=true", dbfile)
     dbfile
 end
